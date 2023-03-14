@@ -8,8 +8,9 @@ import androidx.lifecycle.LifecycleOwner
 import java.util.Calendar
 class demoObserver: LifecycleObserver {
     private val LOG_TAG  = "DemoObserver"
-    public var viewM = mainViewModel
+    var viewM = mainViewModel
     private var ActivationTime = Calendar.getInstance().time
+
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate(){
@@ -48,5 +49,6 @@ class demoObserver: LifecycleObserver {
         Log.i(LOG_TAG, owner.lifecycle.currentState.name)
 
     }
+
 
 }
