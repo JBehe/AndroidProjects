@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Coroutine Project</string>
+    <string name="button">button</string>
+    <string name = "cardview_Text"> Default value </string>
+</resources>
