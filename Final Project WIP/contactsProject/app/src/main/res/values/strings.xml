@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">contactsProject</string>
+    <string name="ProductID">contactsProject</string>
+    <string name="addButton">add</string>
+    <string name="findButton">find</string>
+    <string name="deleteButton">del</string>
+    <string name="ascendingButton">Asc</string>
+    <string name="decendButton">Desc</string>
+    <string name="PhoneNumber"> Phone Number</string>
+    <string name="NameEntry"> Enter Name</string>
+    <string name="todo">TODO</string>
+    <string name="textview">TextView</string>
+</resources>
