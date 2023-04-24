@@ -12,11 +12,17 @@ import com.example.contactsproject.R
 class ContactListAdapter (private val contactItemLayout: Int) :  RecyclerView.Adapter<ContactListAdapter.ViewHolder>() {
     private var contactList: List<Contact>? = null
     override fun onBindViewHolder(holder: ViewHolder, listPosition: Int) {
-        val item = holder.item
+        val nm = holder.name
+        val num = holder.number
+        //holder.itemView.setOnClickListener(){
+
+
+       // }
        // val item2 = holder.item2
         contactList.let {
-            item.text = it!![listPosition].contactName
-           // item2.text = it!![listPosition].phoneNumber.toString()
+            nm.text = it!![listPosition].contactName
+            num.text = it!![listPosition].phoneNumber
+
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
@@ -33,8 +39,9 @@ class ContactListAdapter (private val contactItemLayout: Int) :  RecyclerView.Ad
         return if (contactList == null) 0 else contactList!!.size
     }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var item: TextView = itemView.findViewById(R.id.contactRow)
-       //b var item2: TextView = itemView.findViewById(R.id.phoneNumber)
+        var name: TextView = itemView.findViewById(R.id.contactRow)
+        var number: TextView = itemView.findViewById(R.id.numberRow)
+        //var itemView: TextView = itemView.findViewById(R.id.imageView)
     }
 
 }

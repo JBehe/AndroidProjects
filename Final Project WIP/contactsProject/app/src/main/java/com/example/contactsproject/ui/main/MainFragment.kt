@@ -52,9 +52,9 @@ class MainFragment : Fragment() {
         binding.addButton.setOnClickListener {
             var name = binding.NameEntry.text.toString()
             var phoneNum = binding.phoneNumber.text.toString()
-           // var phoneNum = binding.phoneNumber.text.toString()
+
             if (name != "" && phoneNum != "") {
-                val contact = Contact(name, Integer.parseInt(phoneNum))
+                val contact = Contact(name, phoneNum)
                 viewModel.insertContact(contact)
                 clearFields()
             } else {
@@ -71,6 +71,7 @@ class MainFragment : Fragment() {
         }
         binding.acsendingButton.setOnClickListener {
             viewModel.sortAcending()
+
         }
         binding.descendButton.setOnClickListener {
             viewModel.sortDecending()

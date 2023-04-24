@@ -10,7 +10,7 @@ class ContactRepository(application: Application) {
     val searchResults = MutableLiveData<List<Contact>>()
     private var contactDao: ContactDao?
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
-    val allContacts: LiveData<List<Contact>>?
+    var allContacts: LiveData<List<Contact>>?
 
     init {
         val db: ContactRoomDatabase? =
@@ -46,11 +46,13 @@ class ContactRepository(application: Application) {
 
     private suspend fun asyncFind(name: String): Deferred<List<Contact>?> =
         coroutineScope.async(Dispatchers.IO) {
+            allContacts = contactDao?.getAllContacts()
             return@async contactDao?.findContact(name)
         }
     fun sortAcending(){
        coroutineScope.async(Dispatchers.IO) {
            return@async contactDao?.sortAscending()
+           contactDao?.getAllContacts()
        }
 
    }

@@ -9,7 +9,7 @@ import com.example.contactsproject.ContactRepository
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: ContactRepository = ContactRepository(application)
-    private val allContacts: LiveData<List<Contact>>? = repository.allContacts
+    private var allContacts: LiveData<List<Contact>>? = repository.allContacts
     private val searchResults: MutableLiveData<List<Contact>>
 
     init {
@@ -25,7 +25,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteContact(name)
     }
     fun sortAcending(){
+        //repository.sortAcending(allContacts)
         repository.sortAcending()
+        repository.allContacts = getAllContacts()
     }
     fun sortDecending(){
         repository.sortDecending()

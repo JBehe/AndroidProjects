@@ -16,16 +16,16 @@ class Contact {
     @ColumnInfo(name = "contactName")
     var contactName: String? = null
 
-    @ColumnInfo(name = "phoneNumber")
-    var phoneNumber:  Int = 0
+    //@ColumnInfo(name = "phoneNumber")
+    var phoneNumber:  String? = null
 
     constructor() {}
-    constructor(id: Int, contactname: String, phoneNumber: Int) {
+    constructor(id: Int, contactname: String, phoneNumber: String) {
         this.id = id
         this.contactName = contactname
         this.phoneNumber = phoneNumber
     }
-    constructor(contactname: String, phoneNumber: Int) {
+    constructor(contactname: String, phoneNumber: String) {
         this.contactName = contactname
         this.phoneNumber = phoneNumber
     }
