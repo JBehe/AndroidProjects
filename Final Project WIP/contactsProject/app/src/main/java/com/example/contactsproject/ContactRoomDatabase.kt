@@ -25,7 +25,7 @@ abstract class ContactRoomDatabase: RoomDatabase(){
                         INSTANCE =  Room.databaseBuilder<ContactRoomDatabase>(
                             context.applicationContext,
                             ContactRoomDatabase::class.java,
-                            "contact_database").build()
+                            "contact_db").build()
 
                     }
                 }

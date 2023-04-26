@@ -127,7 +127,7 @@ class MainFragment : Fragment()  {
         binding.contactLayout.layoutManager = LinearLayoutManager(context)
         binding.contactLayout.adapter = adapter
 
-       /* adapter!!.settingListener(object: ContactListAdapter.onItemClickListener{
+        /*adapter!!.settingListener(object: ContactListAdapter.onItemClickListener{
             override fun onClick(id: String) {
 
                 var contactId: Int = parseInt(id)
@@ -135,5 +135,6 @@ class MainFragment : Fragment()  {
                 TODO("Not yet implemented")
             }
         })*/
+
     }
 }
