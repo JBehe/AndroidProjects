@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".ui.main.MainFragment">
 
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -90,16 +91,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/findButton"
-            android:textColor="@color/white" />
-
-        <Button
-            android:id="@+id/deleteButton"
-
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:text="@string/deleteButton"
             android:textColor="@color/white" />
 
         <Button

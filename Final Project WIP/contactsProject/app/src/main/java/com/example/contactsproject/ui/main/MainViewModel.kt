@@ -21,8 +21,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun findContact(name: String) {
         repository.findContact(name)
     }
-    fun deleteContact(name: String) {
-        repository.deleteContact(name)
+    fun deleteContact(id: Int) {
+        repository.deleteContact(id)
     }
     fun sortAcending(){
         //repository.sortAcending(allContacts)
@@ -31,6 +31,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
     fun sortDecending(){
         repository.sortDecending()
+
     }
 
     fun getSearchResults(): MutableLiveData<List<Contact>>? {

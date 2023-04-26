@@ -16,17 +16,17 @@ interface ContactDao {
     fun findContact(name: String): List<Contact>
 
     @Query("DELETE FROM contacts WHERE contactId = :id ")
-    fun deleteContact(id: String)
+    fun deleteContact(id: Int)
 
     @Query("SELECT * FROM contacts")
     fun getAllContacts(): LiveData<List<Contact>>
 
     //THIS DOES THE ASC SORT FROM THE DATABASE
     @Query("SELECT * FROM contacts ORDER BY contactName ASC")
-    fun sortAscending(): LiveData<List<Contact>>
+    fun sortAscending(): List<Contact>
 
     @Query("SELECT * FROM contacts ORDER BY contactName DESC")
-    fun sortDescending(): LiveData<List<Contact>>
+    fun sortDescending(): List<Contact>
 
 
     /*@Insert

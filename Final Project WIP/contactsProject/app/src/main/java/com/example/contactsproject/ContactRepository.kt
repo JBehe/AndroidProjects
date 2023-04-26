@@ -28,14 +28,14 @@ class ContactRepository(application: Application) {
     private suspend fun asyncInsert(contact: Contact) {
         contactDao?.insertContact(contact)
     }
-    fun deleteContact(name: String) {
+    fun deleteContact(id: Int) {
         coroutineScope.launch(Dispatchers.IO) {
-            asyncDelete(name)
+            asyncDelete(id)
         }
     }
 
-    private suspend fun asyncDelete(name: String) {
-        contactDao?.deleteContact(name)
+    private suspend fun asyncDelete(id: Int) {
+        contactDao?.deleteContact(id)
     }
 
     fun findContact(name: String) {
@@ -46,20 +46,27 @@ class ContactRepository(application: Application) {
 
     private suspend fun asyncFind(name: String): Deferred<List<Contact>?> =
         coroutineScope.async(Dispatchers.IO) {
-            allContacts = contactDao?.getAllContacts()
             return@async contactDao?.findContact(name)
         }
     fun sortAcending(){
-       coroutineScope.async(Dispatchers.IO) {
-           return@async contactDao?.sortAscending()
-           contactDao?.getAllContacts()
+       coroutineScope.async(Dispatchers.Main) {
+          searchResults.value = asyncSortASC().await()
        }
 
    }
-    fun sortDecending(){
+    private suspend fun asyncSortASC(): Deferred<List<Contact>?> =
         coroutineScope.async(Dispatchers.IO) {
-            return@async contactDao?.sortDescending()
+            return@async  contactDao?.sortAscending()
+
+    }
+    fun sortDecending(){
+        coroutineScope.async(Dispatchers.Main) {
+            searchResults.value = asyncSortDESC().await()
         }
     }
+    private suspend fun asyncSortDESC(): Deferred<List<Contact>?> =
+        coroutineScope.async(Dispatchers.IO){
+            return@async contactDao?.sortDescending()
+        }
 
 }

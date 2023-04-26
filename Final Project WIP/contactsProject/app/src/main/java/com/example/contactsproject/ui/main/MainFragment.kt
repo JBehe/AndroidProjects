@@ -1,20 +1,27 @@
 package com.example.contactsproject.ui.main
 
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.contactsproject.R
+import android.widget.Toast
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contactsproject.Contact
 import androidx.fragment.app.viewModels
+import com.example.contactsproject.databinding.CardLayoutBinding
 import java.util.*
 import com.example.contactsproject.databinding.FragmentMainBinding
+import java.lang.Integer.parseInt
 
-class MainFragment : Fragment() {
+
+//class MainFragment : Fragment() implements {
+class MainFragment : Fragment()  {
+
 
     private var adapter: ContactListAdapter? = null
 
@@ -28,7 +35,8 @@ class MainFragment : Fragment() {
     val viewModel: MainViewModel by viewModels()
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
+    //private var _binding2: CardLayoutBinding? = null
+    //private val binding2 get() = _binding2
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,23 +60,32 @@ class MainFragment : Fragment() {
         binding.addButton.setOnClickListener {
             var name = binding.NameEntry.text.toString()
             var phoneNum = binding.phoneNumber.text.toString()
-
+            Toast.makeText(context,"placeholder",Toast.LENGTH_LONG)
             if (name != "" && phoneNum != "") {
                 val contact = Contact(name, phoneNum)
                 viewModel.insertContact(contact)
                 clearFields()
             } else {
-                name = "Incomplete information"
+                val toast = Toast.makeText(context, "INVALID, please enter both a name and phone number", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.LEFT,200,200)
+                toast.show()
             }
         }
         binding.findButton.setOnClickListener {
             viewModel.findContact(
                 binding.NameEntry.text.toString())
         }
-        binding.deleteButton.setOnClickListener {
+       /* binding.deleteButton.setOnClickListener {
             viewModel.deleteContact(binding.NameEntry.text.toString())
             clearFields()
-        }
+        }*/
+
+        /*binding2?.trashCan?.setOnClickListener {
+
+            viewModel.deleteContact(binding.ContactID.text.toString())
+            clearFields()
+
+        }*/
         binding.acsendingButton.setOnClickListener {
             viewModel.sortAcending()
 
@@ -76,7 +93,11 @@ class MainFragment : Fragment() {
         binding.descendButton.setOnClickListener {
             viewModel.sortDecending()
         }
+        //binding.contactLayout.setonClickListener{
+            //viewModel.deleteContact()
+       // }
     }
+
 
 
     private fun observerSetup() {
@@ -88,11 +109,15 @@ class MainFragment : Fragment() {
         viewModel.getSearchResults()?.observe(viewLifecycleOwner, Observer { contacts ->
             contacts?.let {
                 if (it.isNotEmpty()) {
-                    binding.ContactID.text = String.format(Locale.US, "%d", it[0].id)
-                    binding.NameEntry.setText(it[0].contactName)
-                    binding.phoneNumber.setText(String.format(Locale.US, "%d", it[0].phoneNumber))
+                    adapter?.setContactList(it)
+                    //observerSetup()
                 } else {
-                    binding.ContactID.text = "No Match"
+                    Toast.makeText(context, "placeHolder", Toast.LENGTH_LONG)
+                    val toast = Toast.makeText(context, "INVALID DATA please enter the name or character of an existing contact",
+                        Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.LEFT,200,200)
+                    toast.show()
+
                 }
             }
         })
@@ -101,5 +126,14 @@ class MainFragment : Fragment() {
         adapter = ContactListAdapter(R.layout.card_layout)
         binding.contactLayout.layoutManager = LinearLayoutManager(context)
         binding.contactLayout.adapter = adapter
+
+       /* adapter!!.settingListener(object: ContactListAdapter.onItemClickListener{
+            override fun onClick(id: String) {
+
+                var contactId: Int = parseInt(id)
+                viewModel.deleteContact(contactId)
+                TODO("Not yet implemented")
+            }
+        })*/
     }
 }

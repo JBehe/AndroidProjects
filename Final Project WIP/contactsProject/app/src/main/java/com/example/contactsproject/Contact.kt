@@ -19,12 +19,12 @@ class Contact {
     //@ColumnInfo(name = "phoneNumber")
     var phoneNumber:  String? = null
 
-    constructor() {}
-    constructor(id: Int, contactname: String, phoneNumber: String) {
-        this.id = id
-        this.contactName = contactname
-        this.phoneNumber = phoneNumber
-    }
+   // constructor() {}
+    //constructor(id: Int, contactname: String, phoneNumber: String) {
+       // this.id = id
+       // this.contactName = contactname
+       // this.phoneNumber = phoneNumber
+    //}
     constructor(contactname: String, phoneNumber: String) {
         this.contactName = contactname
         this.phoneNumber = phoneNumber
